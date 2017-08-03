@@ -1,10 +1,10 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 #### Add a project state badge
 
-See <https://github.com/BCDevExchange/Our-Project-Docs/blob/master/discussion/projectstates.md>
+<a rel="Exploration" href="https://github.com/BCDevExchange/docs/blob/master/discussion/projectstates.md"><img alt="Being designed and built, but in the lab. May change, disappear, or be buggy." style="border-width:0" src="https://assets.bcdevexchange.org/images/badges/exploration.svg" title="Being designed and built, but in the lab. May change, disappear, or be buggy." /></a>
 
-Description of Analysis Code
-============================
+Summary of Provincial Grizzly Bear informaiton for an Area of Interet for Integrated Monitoring reporting
+=========================================================================================================
 
 ### Usage
 
@@ -17,20 +17,13 @@ There are four core scripts that are required for the analysis, they need to be 
 -   03\_visualize.R
 -   04\_output.R
 
-Example
--------
-
-This is a basic example which shows you how to solve a common problem:
-
-``` r
-## basic example code
-```
-
 ### Project Status
+
+This project is under active development.
 
 ### Getting Help or Reporting an Issue
 
-To report bugs/issues/feature requests, please file an [issue](https://github.com/bcgov/%3Crepo-name%3E/issues/).
+To report bugs/issues/feature requests, please file an [issue](https://github.com/bcgov/IM-Report-GBears/issues).
 
 ### How to Contribute
 
@@ -53,3 +46,5 @@ Please note that this project is released with a [Contributor Code of Conduct](C
     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
     See the License for the specific language governing permissions and
     limitations under the License.
+
+This repository is maintained by [ENVEcosystems](https://github.com/orgs/bcgov/teams/envecosystems/members).
