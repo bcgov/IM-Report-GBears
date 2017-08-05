@@ -10,12 +10,14 @@ Summary of Provincial Grizzly Bear informaiton for an Area of Interet for Integr
 
 Describe data being used (links), and how to run. Eg:
 
-There are four core scripts that are required for the analysis, they need to be run in order:
+There are six core scripts that are required for the analysis, the run\_all.R script sets the enviornment variables:
 
--   01\_clean.R
--   02\_analysis.R
--   03\_visualize.R
--   04\_output.R
+-   run\_all\_AOI.R - Area of Interest information entered in run script
+-   01\_load.R
+-   02\_clean.R
+-   03\_analysis\_Maps.R
+-   03\_analysis\_BoxPlots.R - which calls boxplotsGB.R and BoxGB.R
+-   03\_analysis\_GBPU\_Rank.R
 
 ### Project Status
 

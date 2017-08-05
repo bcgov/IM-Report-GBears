@@ -26,12 +26,14 @@ bcgovr::devex_badge("Exploration")
 
 Describe data being used (links), and how to run. Eg:
 
-There are four core scripts that are required for the analysis, they need to be run in order:
+There are six core scripts that are required for the analysis, the run_all.R script sets the enviornment variables:
 
-- 01_clean.R
-- 02_analysis.R
-- 03_visualize.R
-- 04_output.R
+- run_all_AOI.R - Area of Interest information entered in run script
+- 01_load.R
+- 02_clean.R
+- 03_analysis_Maps.R
+- 03_analysis_BoxPlots.R - which calls boxplotsGB.R and BoxGB.R
+- 03_analysis_GBPU_Rank.R
 
 
 ### Project Status
