@@ -41,11 +41,11 @@ R_dir <- "/Users/Morgan/Dropbox/_dev/IMReport_GBears/"
 
 #Identify AOI, AOI shape file name and GBPUs to compare and % overlap
 #Input variables - passed to load script
-AOI<-'OW'
-AOI.Name<-"Office of the Wetsuweten"
-AOI.ShpName <- "Wetsuweten boundary"
-AOI.id<-'Id'
-GBPU.context<-c('Babine','Francois','Bulkley-Lakes','Cranberry','Kitlope-Fiordland','Tweedsmuir')
+AOI<-'LBN'
+AOI.Name<-"Lake Babine Nation"
+AOI.ShpName <- "Lake_Babine"
+AOI.id<-'BOUNDARY_I'
+GBPU.context<-c('Babine', 'Omineca','Nation','Francois','Bulkley-Lakes','Nulki','Cranberry','Upper Skeena-Nass')
 Overlap<-0.20
 
 source(paste(R_dir,"01_load.R",sep=''))

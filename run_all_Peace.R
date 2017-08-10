@@ -37,6 +37,10 @@ require(sp)
 require(XML)
 require(plyr)
 
+#install.packages("devtools") # if not already installed
+library(devtools)
+install_github("bcgov/bcmaps", build_vignettes = TRUE)
+
 R_dir <- "/Users/Morgan/Dropbox/_dev/IMReport_GBears/"
 
 #Identify AOI, AOI shape file name and GBPUs to compare and % overlap
@@ -44,6 +48,7 @@ R_dir <- "/Users/Morgan/Dropbox/_dev/IMReport_GBears/"
 AOI<-'Peace'
 AOI.Name<-"Peace District"
 AOI.ShpName <- "Peace_District"
+AOI.id <- 'OBJECTID'
 GBPU.context<-c('Alta','Hart','Moberly','Rocky','Taiga','Parsnip','Finlay-Ospika')
 Overlap<-0.20
 
