@@ -44,7 +44,6 @@ AOI.name <- AOI
 Prov <- 0 #will compare against GBPUs that provide context for AOI.
 
 #Put or read in full list here
-#nameRU <- read.csv(paste(dir.data,"AOIu_GB.csv",sep=''),header=T)
 nameGBPU <- read.csv(paste(dir.data,"GBPU_GB.csv",sep=''),header=T)
 
 #Do a loop for each GBPU in the unit and one for the entire TSA
@@ -58,16 +57,6 @@ for (i in 1:nrow(nameGBPU)) {
   #Histogram(RU.abbrev, dir.figs, dir.data)
   Boxplots(Prov, AOI, GBPU.name, GBPU.name, dir.figs, dir.data)
   
-  #pdf(file=paste(RU.name,".pdf",sep=""), width=8.5, height=11)
-  
-  #Page1(RU.name, RU.abbrev, Value.name, headcolor, dir.map, dir.figs, dir.data)
-  #Page2(RU.name, RU.abbrev, Value.name, headcolor, dir.map, dir.figs)
-  #Page3(RU.name, RU.abbrev, Value.name, headcolor, dir.map, dir.figs)
-  #Page4(RU.name, RU.abbrev, Value.name, headcolor, dir.map, dir.figs)
-  #OverviewMapPages(RU.name, RU.abbrev, Value.name, headcolor, dir.map)
-  #PageApdx(RU.name, RU.abbrev, Value.name, headcolor, dir.figs)
-  
-  #dev.off()
 }
 
 

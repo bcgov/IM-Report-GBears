@@ -3,20 +3,9 @@
 #
 # # Adapted from version 6.5
 # ------------------------------------------------------------------------------
-#setwd("c:/projects/en2279/R Report")#set working directory
 Boxplots <- function(Prov, AOI.name, GBPU.name, GBPU.abbrev, dir.figs, dir.data) {
 source("03_analysis_BoxGB.r") 
-#outdir<-paste("c:/projects/en2279/R Report/Figs/",sep="")
 outdir<- dir.figs
-
-#RU.name <- "Sunshine Coast"			#"Campbell River"
-#RU.abbrev <- "COSU"				#"CRIV"
-
- #Get data
-# 	dataRU <- read.csv(paste("c:/projects/en2279/data/run_20150304/reports/RU_",RU.abbrev,"_Watershed_Assmnt.csv",sep=""),header=T)
-#	dataBC <- read.csv(paste("c:/projects/en2279/data/run_20150304/reports/BCCE_Watershed_Summary_Poly.csv",sep=""),header=T,strip.#white=T,as.is=T)
- 	#dataRU <- read.csv(paste(dir.data,"RU_",RU.abbrev,"_Watershed_Assmnt.csv",sep=""),header=T)
-	#dataBC <- read.csv(paste(dir.data,"BCCE_Watershed_Summary_Poly.csv",sep=""),header=T,strip.white=T,as.is=T)
 
   #unit that is being evalauted - GBPU
 	dataGBPU<-read.csv(paste(dir.data, GBPU.name, ".csv",sep=""), header=T)

@@ -1,31 +1,7 @@
-# For Chinook, coho, chum, pink, and river sockeye:
 # Box.2 for displaying 2 horizontal boxplots on the same graph
 #
-# For lake sockeye:
-# Box.3 for displaying 3 horizontal boxplots on the same graph
-# 
 # Developed as part of EN2044/EN2100/EN2203
 # S.Casley, 08 Aug 2014
-# 
-# Inputs
-#   dataframe1: data frame containing data to plot in first boxplot along y-axis
-#   dataframe2: data frame containing data to plot in second boxplot along y-axis
-#   dataframe3: data frame containing data to plot in third boxplot along y-axis
-#   use.field: name of column to plot on x-axis (should exist in dataframe 1 and 2) 
-#   use.xlab: x-axis label
-#   use.units: x data units label
-#   use.t: vector of lower and upper threshold values
-#   use.filename: path and file name for output PNG file
-#   use.cuname: name of CU to display in axis label
-#   use.compUnit
-# 
-# Output
-#   PNG file
-# 
-# Version
-#         See benchmark_analysis_v6-3.r for description of previous versions
-#   1.0:  Made stand-alone function executed from benchmark_analysis_v6-x.r
-#   1.1:  Modified boxplot labels for PSF Southern Chinook project
 # 
 
 Box.2<-function(dataframe1, dataframe2, use.field="", use.xlab="", use.units="", use.t, use.filename="", use.cuname="", use.compUnit=""){
