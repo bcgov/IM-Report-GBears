@@ -24,7 +24,7 @@ AOILU1<-subset(AOIOver, LANDSCAPE_ %in% LU1)
 #Calculate area of each resultant
 AOILU1@data$InArea<-(gArea(AOILU1, byid = TRUE))
 #identify those LUs that have at least x overlap with AOI
-AOILU2<-subset(AOILU1, InArea > (Overlap*(Shape_Area)) & !is.na(OBJECTID))
+AOILU2<-subset(AOILU1, InArea > (Overlap*(Shape_Area)) & !is.na(AOI.id))
 LU<-unique(AOILU2@data$LANDSCAPE_)
 AOILU3<-subset(AOI_LU, LANDSCAPE_ %in% LU)
 
