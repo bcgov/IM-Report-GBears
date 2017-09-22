@@ -11,7 +11,7 @@
 # See the License for the specific language governing permissions and limitations under the License.
 
 #Maps Provincial LU indicators
-#By Don Morgan, MoE, 250.877.3199
+#By Don Morgan, MoE
 
 #Plotting - first rd density then mid seral
 pdf(file=paste(figsOutDir,"RdDens_",AOI,".pdf",sep=""))

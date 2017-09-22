@@ -10,7 +10,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 
-#GB_AOI_MapsGBPU_Rank - Don Morgan, MoE, 250.877.3199
+#GB_AOI_MapsGBPU_Rank - Don Morgan, MoE
 #Script creates a map of NatureServe rank
 
 #Subset GBPUs

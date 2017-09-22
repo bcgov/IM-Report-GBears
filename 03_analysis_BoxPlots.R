@@ -11,11 +11,10 @@
 # See the License for the specific language governing permissions and limitations under the License.
 
 #Summarizes Provincial LU indicators by AOI and by GBPU
-#By Don Morgan, MoE, 250.877.3199
+#By Don Morgan, MoE
 
 #############
 # Based on aquatics summary R script generate box plots for gbears
-#       Make sure to comment out the PDF file writing in each page prior to using this
 #############
 
 setwd(R_dir)
