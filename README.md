@@ -8,8 +8,6 @@ Summary of Provincial Grizzly Bear informaiton for an Area of Interet for Integr
 
 ### Usage
 
-Describe data being used (links), and how to run. Eg:
-
 There are six core scripts that are required for the analysis, the run\_all.R script sets the enviornment variables:
 
 -   run\_all\_AOI.R - Area of Interest information entered in run script

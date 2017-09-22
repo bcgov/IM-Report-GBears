@@ -24,8 +24,6 @@ bcgovr::devex_badge("Exploration")
 
 ### Usage
 
-Describe data being used (links), and how to run. Eg:
-
 There are six core scripts that are required for the analysis, the run_all.R script sets the enviornment variables:
 
 - run_all_AOI.R - Area of Interest information entered in run script
