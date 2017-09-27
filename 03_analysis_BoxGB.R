@@ -37,16 +37,22 @@ Box.2<-function(dataframe1, dataframe2, use.field="", use.xlab="", use.units="",
           staplelty='blank',outlty='blank',outpch=NA)
 
   # draw shaded green/yellow/red background based on threshold values
-  cust.green <- rgb(101,163, 0, alpha=150, maxColorValue=255)   
-  cust.yellow<-rgb(255, 255, 0, alpha=150, maxColorValue=255)
-  cust.red<-rgb(255, 90, 0, alpha=250, maxColorValue=255)
+  #cust.green <- rgb(101,163, 0, alpha=150, maxColorValue=255)   
+  #cust.yellow<-rgb(255, 255, 0, alpha=150, maxColorValue=255)
+  #cust.red<-rgb(255, 90, 0, alpha=250, maxColorValue=255)
+  
+  #other blue colours
+  cust.green <- rgb(152,245, 255, alpha=150, maxColorValue=255)   
+  cust.yellow<-rgb(100, 149, 237, alpha=150, maxColorValue=255)
+  cust.red<-rgb(0, 0, 255, alpha=250, maxColorValue=255)
+  
   #The names haven't changes, but the colours are now very light blue, medium blue, and dark blue
   #cust.green <- rgb(240,249,232, alpha=150, maxColorValue=255)   
   #cust.yellow<-rgb(186,228,188, alpha=250, maxColorValue=255)
   #cust.red<-rgb(123,204,196, alpha=250, maxColorValue=255)
  
 
- # set left limit of green to -50000 so there is no white space in Water Allocation graphs
+ # set left limit of green to -50000 so there is no white space 
   rect(-50000,-1,use.t[1],100,col=cust.green,border=NA) 
   rect(use.t[1],-1,use.t[2],100,col=cust.yellow,border=NA)
   rect(use.t[2],-1,use.xlim+100,100,col=cust.red,border=NA)
@@ -54,22 +60,23 @@ Box.2<-function(dataframe1, dataframe2, use.field="", use.xlab="", use.units="",
   # set-up and draw legend
   leg.pos<-"topleft"
   # if indicator has binary use.t...
-  if (use.t[1]==0 & use.t[2]==0){
-    use.leg1<-c("Lower Risk",as.expression(bquote("(="~.(use.t[1])~.(use.units)*")")))
-    use.leg2<-c("Higher Risk",as.expression(bquote("(>"~.(use.t[1])~.(use.units)*")")))
+  if ((use.t)[1]==(use.t)[2]){
+  #if (use.t[1]==0 & use.t[2]==0){
+    use.leg1<-c("Lower Concern",as.expression(bquote("(="~.(use.t[1])~.(use.units)*")")))
+    use.leg2<-c("Higher Concern",as.expression(bquote("(>"~.(use.t[1])~.(use.units)*")")))
     legend(leg.pos,inset=c(1,0),xpd=TRUE,fill=c(cust.green,"white"),border=c("black","white"),
            legend=use.leg1, bty='n',y.intersp=.75)
     legend(leg.pos,inset=c(1,0.5),xpd=TRUE,fill=c(cust.red,"white"),border=c("black","white"),
-           legend=use.leg2, bty='n',y.intersp=.75)
+    legend=use.leg2, bty='n',y.intersp=.75)
   } else {
     if(use.t[1]==0){
-      use.leg1<-c("Low Risk",as.expression(bquote("(="~.(use.t[1])~.(use.units)*")")))
-      use.leg2<-c("Moderate Risk",as.expression(bquote("(>"~.(use.t[1])~.(use.units)*")")))
-      use.leg3<-c("High Risk",as.expression(bquote("(>="~.(use.t[2])~.(use.units)*")")))
+      use.leg1<-c("Low Concern",as.expression(bquote("(="~.(use.t[1])~.(use.units)*")")))
+      use.leg2<-c("Moderate Concern",as.expression(bquote("(>"~.(use.t[1])~.(use.units)*")")))
+      use.leg3<-c("High Concern",as.expression(bquote("(>="~.(use.t[2])~.(use.units)*")")))
     } else {
-      use.leg1<-c("Low Risk",as.expression(bquote("(<"~.(use.t[1])~.(use.units)*")")))
-      use.leg2<-c("Moderate Risk",as.expression(bquote("(>="~.(use.t[1])~.(use.units)*")")))
-      use.leg3<-c("High Risk",as.expression(bquote("(>="~.(use.t[2])~.(use.units)*")")))
+      use.leg1<-c("Low Concern",as.expression(bquote("(<"~.(use.t[1])~.(use.units)*")")))
+      use.leg2<-c("Moderate Concern",as.expression(bquote("(>="~.(use.t[1])~.(use.units)*")")))
+      use.leg3<-c("High Concern",as.expression(bquote("(>="~.(use.t[2])~.(use.units)*")")))
     }
     legend(leg.pos,inset=c(1,0),xpd=TRUE,fill=c(cust.green,"white"),border=c("black","white"),
            legend=use.leg1, bty='n',y.intersp=.75)

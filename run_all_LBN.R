@@ -37,8 +37,6 @@ require(sp)
 require(XML)
 require(plyr)
 
-R_dir <- "/Users/Morgan/Dropbox/_dev/IMReport_GBears/"
-
 #Identify AOI, AOI shape file name and GBPUs to compare and % overlap
 #Input variables - passed to load script
 AOI<-'LBN'
@@ -48,7 +46,8 @@ AOI.id<-'BOUNDARY_I'
 GBPU.context<-c('Babine', 'Omineca','Nation','Francois','Bulkley-Lakes','Nulki','Cranberry','Upper Skeena-Nass')
 Overlap<-0.20
 
-source(paste(R_dir,"01_load.R",sep=''))
+source('01_load.R')
+
 #Bear_Load(AOI, AOI.Name, AOI.ShpName, GBPU.context, Overlap)
 
 #Indiators selected for summarzing
@@ -59,11 +58,11 @@ IndicatorList<-c(0,0,0,0,0,0,0,0,0) #set indicator to 0
 AOIIndicatorList<-c(0,0,0,0,0,0,0,0,0) #set indicator to 0 for AOI
 
 #Clean data, select indicators set up fields for analysis
-source(paste(R_dir,"02_clean.R",sep=''))
+source("02_clean.R")
 
-source(paste(R_dir,"03_analysis_Maps.R",sep=''))
-source(paste(R_dir,"03_analysis_BoxPlots.R",sep=''))
-source(paste(R_dir,"03_analysis_GBPU_Rank.R",sep=''))
+source("03_analysis_Maps.R")
+source("03_analysis_BoxPlots.R")
+source("03_analysis_GBPU_Rank.R")
 
 
 #source("04_output.R")

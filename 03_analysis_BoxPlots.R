@@ -17,7 +17,6 @@
 # Based on aquatics summary R script generate box plots for gbears
 #############
 
-setwd(R_dir)
 dir.data <- dataOutDir
 dir.figs<- figsOutDir
 #fileoutdir<- "/Users/Morgan/Dropbox/Values/GBearsProv/GBAtlas/TSA/PGTSA/" #output files
@@ -27,7 +26,7 @@ dir.figs<- figsOutDir
 #source("Functions.r")#for inserting maps - not currently used
 
 #source files for each panel
-source(paste(R_dir,"03_analysis_boxplotsGB.r",sep=''))
+source("03_analysis_boxplotsGB.r")
 
 #source("histogram.r")
 #source("Page1.r")

@@ -41,8 +41,6 @@ require(plyr)
 library(devtools)
 install_github("bcgov/bcmaps", build_vignettes = TRUE)
 
-R_dir <- "/Users/Morgan/Dropbox/_dev/IMReport_GBears/"
-
 #Identify AOI, AOI shape file name and GBPUs to compare and % overlap
 #Input variables - passed to load script
 AOI<-'Peace'
@@ -52,11 +50,11 @@ AOI.id <- 'OBJECTID'
 GBPU.context<-c('Alta','Hart','Moberly','Rocky','Taiga','Parsnip','Finlay-Ospika')
 Overlap<-0.20
 
-source(paste(R_dir,"01_load.R",sep=''))
+source("01_load.R")
 #Bear_Load(AOI, AOI.Name, AOI.ShpName, GBPU.context, Overlap)
 
 #Clean data, select indicators set up fields for analysis
-source(paste(R_dir,"02_clean.R",sep=''))
+source("02_clean.R")
 
 #Indiators selected for summarzing
 Indicators<-c('Mort_Flag', 'rdDens_Flag','Core_Flag', 'Front_Country_Flag','LU_hunterDayDens_Flag', 'Q_Food','BEC_midSeral_Conifer_gt30_Flag','Protected_Flag','WHA_Flag')
@@ -65,10 +63,9 @@ num_indicators<-length(Indicators)
 IndicatorList<-c(0,0,0,0,0,0,0,0,0) #set indicator to 0
 AOIIndicatorList<-c(0,0,0,0,0,0,0,0,0) #set indicator to 0 for AOI
 
-source(paste(R_dir,"03_analysis_Maps.R",sep=''))
-source(paste(R_dir,"03_analysis_BoxPlots.R",sep=''))
-source(paste(R_dir,"03_analysis_GBPU_Rank.R",sep=''))
-
+source("03_analysis_Maps.R")
+source("03_analysis_BoxPlots.R")
+source("03_analysis_GBPU_Rank.R")
 
 #source("04_output.R")
 

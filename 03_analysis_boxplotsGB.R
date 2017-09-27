@@ -31,9 +31,10 @@ outdir<- dir.figs
 	  compUnit<-paste("All GBPU's", sep="")
 	}
   
+#Must have 2 thresholds in thresh c(0.6,1.25), if binary then repeat c(30,30)
     # 1) ROAD density
   
-	thresh<-c(.6,1.2) #passing in the thresholds for the indicator
+	thresh<-c(.6,0.75) #passing in the thresholds for the indicator
 	Box.2(dataframe1=dataGBPU, dataframe2=dataBC, 
 	      use.field="OpenRoadUtil_KM_x_KM2_noWaterIceRock",
 	      use.xlab=expression("Road density ("*km/km^2*")"),
@@ -78,7 +79,7 @@ outdir<- dir.figs
           use.compUnit=compUnit)
     
     # 5) Mid Seral
-    thresh<-c(20,30)		#still need real values
+    thresh<-c(30,30)		#still need real values
     Box.2(dataframe1=dataGBPU, dataframe2=dataBC,
           use.field="BEC_High_mSeral_PCNT",
           use.xlab=expression("Mid Seral Conifer (%)"),
