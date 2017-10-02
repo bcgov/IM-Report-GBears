@@ -12,7 +12,11 @@
 
 #Clean up LU data for analysis and write out AOI and AOI_GBPU_context data sets for analysis
 
-#Overlay AOI on Prov_LUs
+#Select LUs that are in the context GBPUs
+MapGBPU<-subset(ProvLUs, MAX_GBPU_P %in% GBPU.context)
+AOI_GBPUContext <- gUnaryUnion(MapGBPU, id = NULL)
+
+#Select the LUs that are in the AOI
 df<-data.frame(over(AOIShp,ProvLUs,returnList=TRUE)[1])
 LU1<-unique(df$LANDSCAPE_)
 AOI_LU<-subset(ProvLUs, LANDSCAPE_ %in% LU1)
@@ -24,9 +28,11 @@ AOILU1<-subset(AOIOver, LANDSCAPE_ %in% LU1)
 #Calculate area of each resultant
 AOILU1@data$InArea<-(gArea(AOILU1, byid = TRUE))
 #identify those LUs that have at least x overlap with AOI
-AOILU2<-subset(AOILU1, InArea > (Overlap*(Shape_Area)) & !is.na(AOI.id))
+AOILU2<-subset(AOILU1, (InArea > (Overlap*(Shape_Area)) & !is.na(AOILU1@data[,AOI.id])))
+
 LU<-unique(AOILU2@data$LANDSCAPE_)
 AOILU3<-subset(AOI_LU, LANDSCAPE_ %in% LU)
+#length(AOILU3@data$LANDSCAPE_)
 
 #Write out LUs for AOI
 write.table(data.frame(LU), file = paste(dataOutDir, "AOI_LU_Names.csv",sep=""),append = FALSE, quote = TRUE, row.names = FALSE, col.names = TRUE, sep=",")
