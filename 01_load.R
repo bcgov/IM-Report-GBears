@@ -13,20 +13,19 @@
 #Bear_Load <- function(AOI, AOI.Name, AOI.ShpName, GBPU.context, Overlap) {
   
 #Directory setup 
-fileDir<-"out/"
-AOIdir <- paste(fileDir,AOI,'/',sep='')
-dir.create(file.path(AOIdir), showWarnings = FALSE)
-figsOutDir<-paste(AOIdir,'figures/',sep='')
-dataOutDir<-paste(AOIdir,'data/',sep='')
-dir.create(file.path(figsOutDir), showWarnings = FALSE)
-dir.create(file.path(dataOutDir), showWarnings = FALSE)
-GISdir <- "data/GISData/"
-#setwd(AOIdir)
+AOI.ShpName <- "Lakes_TSA"
+#AOI.id<-'BOUNDARY_I'
+
+#GB CE  data from geodatabase
+GB_gdb <- list.files(file.path(BearsCEDir), pattern = ".gdb", full.names = TRUE)[1]
+gb_list <- st_layers(GB_gdb)
+
+#ProvLUs <- read_sf(GB_gdb, layer = "LU_SUMMARY_poly_v5_20160210")
+#GBPU <- read_sf(GB_gdb, layer = "GBPU_BC_edits_v2_20150601")
 
 #Read in shape files and refine for AOI
-ProvLUs<-readOGR(dsn=GISdir, layer="LU_SUMMARY_poly_v5_20160210")
+#ProvLUs<-readOGR(dsn=GISdir, layer="LU_SUMMARY_poly_v5_20160210")
 AOIShp<-readOGR(dsn=GISdir, layer=AOI.ShpName)
-GBPU<-readOGR(dsn=GISdir, layer='GBPU')
 
 #Read in LU csv 
 LU_Summ_in <- data.frame(read.csv(header=TRUE, file=paste(GISdir, "GBear_LU_Summary_scores_v5_20160823.csv", sep=""), sep=",", strip.white=TRUE, ))
