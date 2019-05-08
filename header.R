@@ -10,36 +10,42 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 
-
-library(sf)
 library(dplyr)
 library(plyr)
 library(readr)
-library(raster)
+#library(raster)
 library(bcmaps)
-library(fasterize)
+#library(fasterize)
 library(tidyr)
-library(rio)
-library(WriteXLS)
+#library(rio)
+#library(WriteXLS)
 library(readxl)
-library(rgdal)
+#library(rgdal)
 library(RColorBrewer)
+library(mapview)
+library(ggplot2)
+library(GISTools)
+library(sf)
+library(ggspatial)
 
-#AOI setup 
-AOI<-'Lakes'
-AOI.Name<-"Lakes TSA"
+options(sf_max.plot=1)
+options(scipen=999) #dont show scientific notation unless of a certain size
 
 #Directory setup
-fileDir<-"out/"
-AOIdir <- paste(fileDir,AOI,'/',sep='')
-figsOutDir<-paste(AOIdir,'figures/',sep='')
-dataOutDir<-paste(AOIdir,'data/',sep='')
-GISdir <- "data/spatial/"
+OutDir <- 'out'
+DataDir <- 'data'
+dataOutDir <- file.path(OutDir,'data')
+spatialOutDir <- file.path(OutDir,'spatial')
+figsOutDir <- file.path(OutDir,'figures')
+GISdir <- "data/spatial"
 BearsCEDir <- file.path('../GB_Data/data/BearsCE')
+RankDir <- file.path('../grizzly-bear-IUCN-threats/out/data')
 
-dir.create(file.path(fileDir), showWarnings = FALSE)
-dir.create(file.path(AOIdir), showWarnings = FALSE)
-dir.create(file.path(figsOutDir), showWarnings = FALSE)
+dir.create(file.path(OutDir), showWarnings = FALSE)
+dir.create(file.path(DataDir), showWarnings = FALSE)
 dir.create(file.path(dataOutDir), showWarnings = FALSE)
+dir.create(file.path(figsOutDir), showWarnings = FALSE)
+dir.create(file.path(spatialOutDir), showWarnings = FALSE)
 dir.create(file.path(GISdir), showWarnings = FALSE)
+dir.create(file.path('tmp'), showWarnings = FALSE)
 

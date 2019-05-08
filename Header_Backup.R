@@ -47,3 +47,29 @@ dir.create(DataDir, showWarnings = FALSE)
 dir.create("tmp", showWarnings = FALSE)
 
 
+#Required packages
+options(scipen=3)
+gpclibPermit()
+require(maptools)
+require(shapefiles)
+require(gpclib)
+gpclibPermit()
+require(RColorBrewer) # creates nice color schemes
+require(e1071) #package needed for classInt
+require(classInt) # finds class intervals for continuous variables
+require(png) # next 3 for pulling in google maps
+require(RJSONIO)
+require(RgoogleMaps)
+require(maps) # for scale bar
+require(rgeos)
+require(GISTools)
+require(dismo)
+require(spatialEco)
+require(dplyr)
+require(tidyverse)
+require(sf)
+require(raster)
+require(rgdal)
+require(sp)
+require(XML)
+require(plyr)

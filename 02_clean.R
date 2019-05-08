@@ -10,76 +10,68 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 
-#Clean up LU data for analysis and write out AOI and AOI_GBPU_context data sets for analysis
+source("header.R")
 
-#Select LUs that are in the context GBPUs
-MapGBPU<-subset(ProvLUs, MAX_GBPU_P %in% GBPU.context)
-AOI_GBPUContext <- gUnaryUnion(MapGBPU, id = NULL)
+#Subset out only those LUs with >overlap% of their area in AOI - % set in run_all script
+# Code modified from here https://rpubs.com/rural_gis/255550
+AOI.int <- as_tibble(st_intersection(AOI.spatial,ProvLUs.spatial))
+#add in an area count column to the tibble - 
+AOI.int$areaArable <- as.single(st_area(AOI.int$geometry))/1000000
+AOI.intcomp<-AOI.int %>%
+  mutate(LU=LANDSCAPE_UNIT_PROVID) %>%
+  mutate(areaOverlap=round(areaArable,0)) %>%
+  mutate(LUArea=round(LU_AREA_KM2,0)) %>%
+  mutate(diff=round(areaOverlap/LUArea*100),0) %>%
+  mutate(keepLU=diff>Overlap*100) %>%
+  dplyr::select(LU,areaOverlap,LUArea,diff,keepLU)
 
-#Select the LUs that are in the AOI
-df<-data.frame(over(AOIShp,ProvLUs,returnList=TRUE)[1])
-LU1<-unique(df$LANDSCAPE_)
-AOI_LU<-subset(ProvLUs, LANDSCAPE_ %in% LU1)
+LU_list<-subset(AOI.intcomp, keepLU==TRUE)$LU
 
-#Subset out only those LUs with >overlap% of their area in AOI
-AOIOver<-raster::union(ProvLUs,AOIShp)
-#subset out the LU fragements that intersect the AOI
-AOILU1<-subset(AOIOver, LANDSCAPE_ %in% LU1)
-#Calculate area of each resultant
-AOILU1@data$InArea<-(gArea(AOILU1, byid = TRUE))
-#identify those LUs that have at least x overlap with AOI
-AOILU2<-subset(AOILU1, (InArea > (Overlap*(Shape_Area)) & !is.na(AOILU1@data[,AOI.id])))
-
-LU<-unique(AOILU2@data$LANDSCAPE_)
-AOILU3<-subset(AOI_LU, LANDSCAPE_ %in% LU)
-#length(AOILU3@data$LANDSCAPE_)
-
-#Write out LUs for AOI
-write.table(data.frame(LU), file = paste(dataOutDir, "AOI_LU_Names.csv",sep=""),append = FALSE, quote = TRUE, row.names = FALSE, col.names = TRUE, sep=",")
-
-#Check results
-pdf(file=paste(dataOutDir,"LUSelect_",AOI,".pdf",sep=""))
-plot(MapGBPU)
-lines(AOI_LU, col='blue')
-lines(AOILU3, col='green')
-lines(AOIShp,col='yellow',lwd=2.5)
-lines(AOI_GBPUContext, col='red')
-dev.off()
-
-#Make a csv for all unique names of GBPUs in AOI + row for AOI
-GBPUsOnly<-unique(data.frame(LU_Summ_in$MAX_GRIZZLY_BEAR_POP_UNIT_ID, LU_Summ_in$MAX_GBPU_POPULATION_NAME))
-colnames(GBPUsOnly)<-c("GBPU_CODE", "GBPU_NAME")
-GBPUsOut<-subset(GBPUsOnly,GBPU_NAME %in% GBPU.context)
-colnames(GBPUsOut)<-c("GBPU_CODE", "GBPU_NAME")
-AOIRow<-data.frame(GBPU_CODE=AOI.Name,GBPU_NAME=AOI)
-GBPUs<-rbind(GBPUsOut,AOIRow)
-
-#Use only AOI
-GBPUs<-GBPUs[nrow(GBPUs),]
-
-write.table((GBPUs), file = paste(dataOutDir ,"GBPU_GB.csv",sep=""), append=FALSE, quote = FALSE, row.names = FALSE, col.names = TRUE, sep=",")#sep="\t")
-
-#####
 #calc some new variables so consistent Pass/Fail 
-LU_Summ_in$AOIOnly<-ifelse(LU_Summ_in$LANDSCAPE_UNIT_PROVID %in% LU, 1,0)
-LU_Summ_in$Mort_Flag<-ifelse((LU_Summ_in$Pop_Mort_Flag_Hunt== 'Fail' | LU_Summ_in$Pop_Mort_Flag_NoHunt== 'Fail'), 'Fail', 'Pass')
-LU_Summ_in$rdDens_Flag<-ifelse(LU_Summ_in$rdDens_Flag_ge_pt6=='Yes', 'Fail','Pass')
-LU_Summ_in$Core_Flag<-ifelse(LU_Summ_in$LU_Secure_Core_PCNT <60, 'Fail', 'Pass')
-LU_Summ_in$NonCore<-100-LU_Summ_in$LU_Secure_Core_PCNT
-LU_Summ_in$Protected_Flag<-ifelse(LU_Summ_in$Protected_PCNT <30, 'Fail', 'Pass')
-LU_Summ_in$Q_Food<-ifelse(LU_Summ_in$Quality_Food_Flag=='Yes', 'Pass','Fail')
-LU_Summ_in$WHA_Flag<-ifelse(LU_Summ_in$WHA_EBM_Flag=='Yes', 'Pass','Fail')
+ProvLUs.spatial <- ProvLUs.spatial %>%
+  mutate(AOIOnly = ifelse(LANDSCAPE_UNIT_PROVID %in% LU_list, 1,0)) %>%
+  mutate(Mort_Flag = ifelse((Pop_Mort_Flag_Hunt== 'Fail' | Pop_Mort_Flag_NoHunt== 'Fail'), 'Fail', 'Pass'))  %>%
+  mutate(rdDens_Flag = ifelse(rdDens_Flag_ge_pt6=='Yes', 'Fail','Pass')) %>%
+  mutate(Core_Flag = ifelse(LU_Secure_Core_PCNT <60, 'Fail', 'Pass')) %>%
+  mutate(NonCore = 100-LU_Secure_Core_PCNT) %>%
+  mutate(Protected_Flag = ifelse(Protected_PCNT <30, 'Fail', 'Pass')) %>%
+  mutate(Q_Food = ifelse(Quality_Food_Flag=='Yes', 'Pass','Fail')) %>%
+  mutate(WHA_Flag = ifelse(WHA_EBM_Flag=='Yes', 'Pass','Fail'))
 
-#Subset out those LUs to be considered part of AOI
-AOI_LU<-(subset(LU_Summ_in, LANDSCAPE_UNIT_PROVID %in% LU))
-write.table(AOI_LU, file = paste(dataOutDir, "AOI_LUs.csv",sep=""),append = FALSE, quote = TRUE, row.names = FALSE, col.names = TRUE, sep=",")
+#pull out the AOI Lus and strip the geometry off the sf object
+AOI_LU.spatial<-ProvLUs.spatial[ProvLUs.spatial$LANDSCAPE_UNIT_PROVID %in% LU_list,]
+AOI_LU <- AOI_LU.spatial
+st_geometry(AOI_LU) <- NULL
 
-GBPU_LU_Context<-subset(LU_Summ_in, MAX_GBPU_POPULATION_NAME %in% GBPU.context)
-#Subset all LUs in GBPU context area
-write.table(GBPU_LU_Context, file = paste(dataOutDir, "AOIContext_LUs.csv",sep=""),append = FALSE, quote = TRUE, row.names = FALSE, col.names = TRUE, sep=",")
+#Subset all LUs in GBPU context area and strip sf geometry and write to file for box plots
+GBPU_LU_Context.spatial<-subset(ProvLUs.spatial, MAX_GBPU_POPULATION_NAME %in% GBPU.context)
+
+GBPU_LU_Context<-GBPU_LU_Context.spatial
+st_geometry(GBPU_LU_Context) <- NULL
+write.table(GBPU_LU_Context, file = file.path(dir.data,"AOIContext_LUs.csv"),append = FALSE, quote = TRUE, row.names = FALSE, col.names = TRUE, sep=",")
+
+#Union GBPUs so one polygon for viewing
+GBPU.AOI.spatial<-st_union(GBPU_LU_Context.spatial)
+
+#GBPUs use for analysis
+GBPUs.used <- subset(GBPU, POPULATION_NAME %in% GBPU.context)
+nameGBPU<-data.frame(GBPU_CODE=GBPUs.used$GRIZZLY_BEAR_POP_UNIT_ID, GBPU_NAME=GBPUs.used$POPULATION_NAME)
+
+#Check results to see if appropriate LUs have been select in AOI and in overlapping GBPUs
+# mapview(GBPU.spatial)+mapview(GBPU.AOI.spatial)+mapview(GBPU_LU_Context.spatial)+mapview(AOI.spatial)+mapview(AOI_LU.spatial)
+
+#strip out the geometry of the ProvLUs object, subset to AOI and write to file for box plots
+ProvLUs <- ProvLUs.spatial
+st_geometry(ProvLUs) <- NULL
+
+AOI_LU <- subset(ProvLUs, LANDSCAPE_UNIT_PROVID %in% LU_list)
+
+write.table(AOI_LU, file = file.path(dataOutDir, paste("AOI_LUs.csv",sep="")),
+            append = FALSE, quote = TRUE, row.names = FALSE, col.names = TRUE, sep=",")
 
 #####
 #Loop through GBPUs, AOI and indicators and output analysis ready data sets
+
 gbpu<-1
 num<-length(GBPU.context)+1
 for (gbpu in 1:num) {
@@ -90,18 +82,8 @@ for (gbpu in 1:num) {
     GBSubset <- GBPU.context[gbpu] 
     subset(GBPU_LU_Context,MAX_GBPU_POPULATION_NAME == GBSubset)
   } else 
-    #GBPU1 <-TSA_RU
-    #GBPU1 <-GBPU_RU
     GBPU1 <- AOI_LU
-  #nrow(GBPU1)
-  
-  #subset the TSA portion of the GBPU
-  AOI_GBPU1<-subset(GBPU_LU_Context,MAX_GBPU_POPULATION_NAME== GBSubset & AOIOnly==1)
-  #noTSALU<-nrow(TSA_GBPU1)
-  #compare the number of LUs in each
-  #nrow(GBPU1)
-  #nrow(TSA_GBPU1)
-  
+ 
   #Calc the area of the GBPU - may change to area that is not rock/ice
   GBPUArea<-GBPUArea<-sum(GBPU1$Shape_Area)/10000
   #Calc the area of the AOI portion of the GBPU
@@ -135,13 +117,13 @@ for (gbpu in 1:num) {
   colnames(GBPU3)<-c('GBPU','GBPUArea','Mortality','RoadDensity','CoreSercurityAreas','FrontCountry','HunterDensity','QaulityFood','MidSeral','HabitatProtection','WHA')
   
   ifelse(gbpu == 1, appendcolvar<-FALSE, appendcolvar<-TRUE)
-  write.table((GBPU3), file = paste(dataOutDir ,"GBPUOut.csv",sep=""),append = appendcolvar, quote = FALSE, row.names = FALSE, col.names = !appendcolvar, sep=",")#sep="\t") ifelse(gbpu == 1, appendcolvar<-FALSE, appendcolvar<-TRUE)
+  write.table((GBPU3), file = (file.path(dataOutDir,"GBPUOut.csv")),append = appendcolvar, quote = FALSE, row.names = FALSE, col.names = !appendcolvar, sep=",")#sep="\t") ifelse(gbpu == 1, appendcolvar<-FALSE, appendcolvar<-TRUE)
   
   ifelse(gbpu == 1, appendcolvar<-FALSE, appendcolvar<-TRUE)
-  write.table((GBPU2), file = paste(dataOutDir ,"GBPUTSAOut.csv",sep=""),append = appendcolvar, quote = FALSE, row.names = FALSE, col.names = !appendcolvar, sep=",")#sep="\t")
+  write.table((GBPU2), file = (file.path(dataOutDir ,"GBPUTSAOut.csv")),append = appendcolvar, quote = FALSE, row.names = FALSE, col.names = !appendcolvar, sep=",")#sep="\t")
   
   #Create a data frame for each data set (GBPU) and write out individually
-  write.table((GBPU1), file = paste(dataOutDir, GBSubset, ".csv",sep=""),append = FALSE, quote = TRUE, row.names = FALSE, col.names = TRUE, sep=",")
+  write.table((GBPU1), file = file.path(dataOutDir, paste(GBSubset, ".csv", sep='')),append = FALSE, quote = TRUE, row.names = FALSE, col.names = TRUE, sep=",")
   
 }  
 

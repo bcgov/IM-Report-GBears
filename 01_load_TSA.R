@@ -13,25 +13,24 @@
 source("header.R")
 
 # Consolidate AOI into a single geometry
-AOI.spatial <- TSAs[TSAs$TSA_NUMBER_DESCRIPTION %in% AOI ,] %>% 
+AOI.geom <- TSAs[TSAs$TSA_NUMBER_DESCRIPTION %in% AOI ,] %>% 
   split(.$TSA_NUMBER_DESCRIPTION) %>% 
   lapply(st_union) %>% 
-  do.call(c, .) %>% # bind the list element to a single sfc
-  st_cast()%>% # mapview doesn't like GEOMETRY -> cast to MULTIPOLYGON
-  mapview()
-AOI.spatial
+  do.call(c, .) %>% 
+  st_cast()
+AOI.spatial <- st_sf(data.frame(TSA_NUMBER_DESCRIPTION=AOI, geom=AOI.geom))
 
-#GB CE  data from geodatabase
+#GB CE data from geodatabase - available from Provincial CE program - Rob Oostlander
 GB_gdb <- list.files(file.path(BearsCEDir), pattern = ".gdb", full.names = TRUE)[1]
 gb_list <- st_layers(GB_gdb)
 
-ProvLUs <- read_sf(GB_gdb, layer = "LU_SUMMARY_poly_v5_20160210")
-GBPU <- read_sf(GB_gdb, layer = "GBPU_BC_edits_v2_20150601")
+ProvLUs.spatial <- 
+  read_sf(GB_gdb, layer = "LU_SUMMARY_poly_v5_20160210")
+
+GBPU.spatial <- read_sf(GB_gdb, layer = "GBPU_BC_edits_v2_20150601")
+GBPU<-GBPU.spatial
+st_geometry(GBPU) <- NULL
 
 #NatureSerce ranking data
 GBRe_Rank <- data.frame(read_excel(path=file.path(RankDir,paste('Threat_Calc.xls',sep=''))))
-
-#Read in LU csv 
-#LU_Summ_in <- data.frame(read.csv(header=TRUE, file=paste(GISdir, "GBear_LU_Summary_scores_v5_20160823.csv", sep=""), sep=",", strip.white=TRUE, ))
-
 

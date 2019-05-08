@@ -19,22 +19,9 @@
 
 dir.data <- dataOutDir
 dir.figs<- figsOutDir
-#fileoutdir<- "/Users/Morgan/Dropbox/Values/GBearsProv/GBAtlas/TSA/PGTSA/" #output files
-#dir.map <- paste("/Users/Morgan/Dropbox/Values/GBearsProv/GBAtlas/GISData/",sep="")
-
-#read in functions first
-#source("Functions.r")#for inserting maps - not currently used
 
 #source files for each panel
-source("03_analysis_boxplotsGB.r")
-
-#source("histogram.r")
-#source("Page1.r")
-#source("Page2.r")
-#source("Page3.r")
-#source("Page4.r")
-#source("ApdxMaps.r")
-#source("Apdx.r")
+source("03_analysis_boxplotsGB.R")
 
 Value.name<-"Grizzly Bears"
 headcolor <- "lightskyblue2"
@@ -42,12 +29,9 @@ AOI.name <- AOI
 Prov <- 0 #will compare against GBPUs that provide context for AOI.
 
 #Put or read in full list here
-nameGBPU <- read.csv(paste(dir.data,"GBPU_GB.csv",sep=''),header=T)
+#nameGBPU <- read.csv(paste(dir.data,"GBPU_GB.csv",sep=''),header=T)
 
 #Do a loop for each GBPU in the unit and one for the entire TSA
-
-#i<-1
-#i in 1:nrow(nameRU)
 for (i in 1:nrow(nameGBPU)) {
   GBPU.name <- nameGBPU$GBPU_NAME[i]
   GBPU.abbrev <- nameGBPU$GBPU_CODE[i]

@@ -12,13 +12,13 @@
 
 source("header.R")
 
-# Consolidate AOI into a single geometry
-AOI.spatial <- TSAs[TSAs$TSA_NUMBER_DESCRIPTION %in% AOI ,] %>% 
-  split(.$TSA_NUMBER_DESCRIPTION) %>% 
-  lapply(st_union) %>% 
-  do.call(c, .) %>% # bind the list element to a single sfc
-  st_cast()%>% # mapview doesn't like GEOMETRY -> cast to MULTIPOLYGON
-  mapview()
+# Consolidate AOI into a single geometry - need to modify this section based on AOI boundary
+AOI<-'LBN'
+AOI.Name<-"Lake Babine Nation"
+AOI.ShpName <- "Lake_Babine"
+
+AOI.spatial<-read_sf(dsn=GISdir, layer=AOI.ShpName)
+mapview()
 AOI.spatial
 
 #GB CE  data from geodatabase

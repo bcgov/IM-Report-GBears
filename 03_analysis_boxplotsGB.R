@@ -15,18 +15,18 @@
 #
 # ------------------------------------------------------------------------------
 Boxplots <- function(Prov, AOI.name, GBPU.name, GBPU.abbrev, dir.figs, dir.data) {
-source("03_analysis_BoxGB.r") 
+source("03_analysis_BoxGB.R") 
 outdir<- dir.figs
 
   #unit that is being evalauted - GBPU
-	dataGBPU<-read.csv(paste(dir.data, GBPU.name, ".csv",sep=""), header=T)
+	dataGBPU<-read.csv(file.path(dir.data,paste(GBPU.name, ".csv",sep="")), header=T)
   
 	#compare individual GBPUs to either entire province or to TSA only
 	if(Prov==1){
-	  dataBC<- (read.csv(paste(dir.data,"AOIContext_LUs.csv",sep=""),header=T))
+	  dataBC<- (read.csv(file.path(dir.data,"AOIContext_LUs.csv"),header=T))
 	  compUnit<-"BC"
 	} else {
-	  dataBC<- (read.csv(paste(dir.data, "AOIContext_LUs.csv",sep=""), header=T))
+	  dataBC<- (read.csv(file.path(dir.data,"AOIContext_LUs.csv"),header=T))
 	  #compUnit<-paste(AOI.name,"'s intersecting GBPU's", sep="")
 	  compUnit<-paste("All GBPU's", sep="")
 	}
@@ -40,7 +40,7 @@ outdir<- dir.figs
 	      use.xlab=expression("Road density ("*km/km^2*")"),
 	      use.units=quote(km/km^2), 
 	      use.t=thresh, 
-	      use.filename=paste(outdir,GBPU.abbrev,"_","RoadDensity",".png",sep=""), 
+	      use.filename=file.path(outdir,paste(GBPU.abbrev,"_","RoadDensity",".png",sep="")), 
 	      use.cuname=GBPU.name,
 	      use.compUnit=compUnit) 
 	
@@ -52,7 +52,7 @@ outdir<- dir.figs
           use.xlab=expression("UnSecure Core Habitat (%)"),
           use.units="%",
           use.t=thresh,
-          use.filename=paste(outdir,GBPU.abbrev,"_","Core",".png",sep=""), 
+          use.filename=file.path(outdir,paste(GBPU.abbrev,"_","Core",".png",sep="")), 
           use.cuname=GBPU.name,
           use.compUnit=compUnit)
     
@@ -63,7 +63,7 @@ outdir<- dir.figs
           use.xlab=expression("Front Country (%)"),
           use.t=thresh,
           use.units="%",
-          use.filename=paste(outdir,GBPU.abbrev,"_","Front_Country",".png",sep=""), 
+          use.filename=file.path(outdir,paste(GBPU.abbrev,"_","Front_Country",".png",sep="")), 
           use.cuname=GBPU.name,
           use.compUnit=compUnit)
     
@@ -74,7 +74,7 @@ outdir<- dir.figs
           use.xlab=expression("Hunter Density ("*no./km^2*")"),
           use.t=thresh,
           use.units=quote(days/km^2),
-          use.filename=paste(outdir,GBPU.abbrev,"_","Hunter_Days",".png",sep=""), 
+          use.filename=file.path(outdir,paste(GBPU.abbrev,"_","Hunter_Days",".png",sep="")), 
           use.cuname=GBPU.name,
           use.compUnit=compUnit)
     
@@ -85,7 +85,7 @@ outdir<- dir.figs
           use.xlab=expression("Mid Seral Conifer (%)"),
           use.t=thresh,
           use.units="%",
-          use.filename=paste(outdir,GBPU.abbrev,"_","Mid_Seral",".png",sep=""), 
+          use.filename=file.path(outdir,paste(GBPU.abbrev,"_","Mid_Seral",".png",sep="")), 
           use.cuname=GBPU.name,
           use.compUnit=compUnit)
     
