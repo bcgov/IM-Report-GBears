@@ -10,8 +10,7 @@ intersecting Grizzly Bear Population Units (GBPUs).
 
 ### Usage
 
-There are six core scripts that are required for the analysis, the
-run\_all.R script sets the environment variables:
+There are six core scripts that are required for the analysis:
 
 `01_load_TSA.R` Data load for AOI:
 
@@ -34,10 +33,11 @@ run\_all.R script sets the environment variables:
 
 ### Example Output
 
-The script generates 3 types of output; 1) indicator maps for AOI, 2)
-box plots comparing AOI LUs with GBPUs LUs, and 3) map of management
-rank. ![inputs](img/RdDensLakes%20TSA.png)
-![inputs](img/Francois_RoadDensity.png)
+`Indicator maps for AOI`
+
+![](img/RdDensLakes%20TSA.png)
+`Box plots comparing AOI LUs with GBPUs LUs`
+![](img/Francois_RoadDensity.png)
 
 ### Project Status
 
@@ -59,7 +59,7 @@ to abide by its terms.
 
 ### License
 
-    Copyright 2017 Province of British Columbia
+    Copyright 2019 Province of British Columbia
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
