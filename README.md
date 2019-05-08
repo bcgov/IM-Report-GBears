@@ -2,21 +2,40 @@
 Summary of Provincial Grizzly Bear informaiton for an Area of Interet for Integrated Monitoring reporting
 =========================================================================================================
 
+Summaries of Provincial Cumulative Effects (CE) Grizzly Bear and
+Management status ranking data for use in reports. The script generates
+maps and box plots of indicators. The box plots compare the Landscape
+Units (LUs) withing an Area of Interest (AOI) with those for all of the
+intersecting Grizzly Bear Population Units (GBPUs).
+
 ### Usage
 
 There are six core scripts that are required for the analysis, the
 run\_all.R script sets the enviornment variables:
 
--   run\_all\_AOI.R - Area of Interest information entered in run script
--   01\_load.R
--   02\_clean.R
--   03\_analysis\_Maps.R
--   03\_analysis\_BoxPlots.R - which calls boxplotsGB.R and BoxGB.R
--   03\_analysis\_GBPU\_Rank.R
+1.  01\_load\_TSA.R
+
+data load for AOI. - TSA provided as an example with download from
+GeoBC. - Requires Provincial Grizzly Bear CE geodatabase, which includes
+LU summary datat and GBPUs. available from Provincial CE program.
+
+1.  run\_all\_AOI.R:
+
+Identify Area of Interest analysis parameters - AOI name and GBPUs to
+consider for the anlysis - Set % overlap for LUs that overlap AOI
+boundary - Identify which CE intdicators to consider - main ones are
+listed, but a subset can be identified
+
+Calls set of R scripts to clean data and run analysis - 01\_load\_TSA.R
+- 02\_clean.R - 03\_analysis\_Maps.R - 03\_analysis\_BoxPlots.R - which
+calls boxplotsGB.R and BoxGB.R - 03\_analysis\_GBPU\_Rank.R
 
 ### Example Output
 
-![inputs](img/GBPU_Lakes%20TSA.png)
+The script generates 3 types of output; 1. indicator maps for AOI, 2)
+box plots comparing AOI LUs with GBPUs LUs, and 3) map of management
+rank. ![inputs](img/RdDensLakes%20TSA.png)
+![inputs](img/Francois_RoadDensity.png)
 
 ### Project Status
 
