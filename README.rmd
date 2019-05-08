@@ -14,12 +14,6 @@ knitr::opts_chunk$set(
 )
 ```
 
-#### Add a project state badge 
-
-```{r, echo=FALSE, results='asis'}
-bcgovr::devex_badge("Exploration")
-```
-
 # Summary of Provincial Grizzly Bear informaiton for an Area of Interet for Integrated Monitoring reporting
 
 ### Usage
@@ -33,6 +27,8 @@ There are six core scripts that are required for the analysis, the run_all.R scr
 - 03_analysis_BoxPlots.R - which calls boxplotsGB.R and BoxGB.R
 - 03_analysis_GBPU_Rank.R
 
+### Example Output
+![inputs](img/GBPU_Lakes TSA.png)
 
 ### Project Status
 This project is under active development.

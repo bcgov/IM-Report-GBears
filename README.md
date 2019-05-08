@@ -1,14 +1,11 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-#### Add a project state badge
-
-<a rel="Exploration" href="https://github.com/BCDevExchange/docs/blob/master/discussion/projectstates.md"><img alt="Being designed and built, but in the lab. May change, disappear, or be buggy." style="border-width:0" src="https://assets.bcdevexchange.org/images/badges/exploration.svg" title="Being designed and built, but in the lab. May change, disappear, or be buggy." /></a>
-
 Summary of Provincial Grizzly Bear informaiton for an Area of Interet for Integrated Monitoring reporting
 =========================================================================================================
 
 ### Usage
 
-There are six core scripts that are required for the analysis, the run\_all.R script sets the enviornment variables:
+There are six core scripts that are required for the analysis, the
+run\_all.R script sets the enviornment variables:
 
 -   run\_all\_AOI.R - Area of Interest information entered in run script
 -   01\_load.R
@@ -17,19 +14,27 @@ There are six core scripts that are required for the analysis, the run\_all.R sc
 -   03\_analysis\_BoxPlots.R - which calls boxplotsGB.R and BoxGB.R
 -   03\_analysis\_GBPU\_Rank.R
 
+### Example Output
+
+![inputs](img/GBPU_Lakes%20TSA.png)
+
 ### Project Status
 
 This project is under active development.
 
 ### Getting Help or Reporting an Issue
 
-To report bugs/issues/feature requests, please file an [issue](https://github.com/bcgov/IM-Report-GBears/issues).
+To report bugs/issues/feature requests, please file an
+[issue](https://github.com/bcgov/IM-Report-GBears/issues).
 
 ### How to Contribute
 
-If you would like to contribute, please see our [CONTRIBUTING](CONTRIBUTING.md) guidelines.
+If you would like to contribute, please see our
+[CONTRIBUTING](CONTRIBUTING.md) guidelines.
 
-Please note that this project is released with a [Contributor Code of Conduct](CODE_OF_CONDUCT.md). By participating in this project you agree to abide by its terms.
+Please note that this project is released with a [Contributor Code of
+Conduct](CODE_OF_CONDUCT.md). By participating in this project you agree
+to abide by its terms.
 
 ### License
 
@@ -47,4 +52,5 @@ Please note that this project is released with a [Contributor Code of Conduct](C
     See the License for the specific language governing permissions and
     limitations under the License.
 
-This repository is maintained by [ENVEcosystems](https://github.com/orgs/bcgov/teams/envecosystems/members).
+This repository is maintained by
+[ENVEcosystems](https://github.com/orgs/bcgov/teams/envecosystems/members).

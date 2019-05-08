@@ -48,4 +48,5 @@ dir.create(file.path(figsOutDir), showWarnings = FALSE)
 dir.create(file.path(spatialOutDir), showWarnings = FALSE)
 dir.create(file.path(GISdir), showWarnings = FALSE)
 dir.create(file.path('tmp'), showWarnings = FALSE)
+dir.create(file.path('img'), showWarnings = FALSE)
 
