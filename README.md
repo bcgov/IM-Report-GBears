@@ -22,17 +22,15 @@ run\_all.R script sets the environment variables:
 `run_all_AOI.R` Identify Area of Interest analysis parameters:
 
 -   AOI name and GBPUs to consider for the analysis
--   Set % overlap for LUs that overlap AOI boundary.
-
-Identify which CE indicators to consider - main ones are listed, but a
-subset can be identified:
-
+-   Set % overlap for LUs that overlap AOI boundary
+-   Identify which CE indicators to consider - main ones are listed, but
+    a subset can be identified:
 -   Calls set of R scripts to clean data and run analysis
--   01\_load\_TSA.R
--   02\_clean.R
--   03\_analysis\_Maps.R
--   03\_analysis\_BoxPlots.R - which calls boxplotsGB.R and BoxGB.R
--   03\_analysis\_GBPU\_Rank.R.
+    -   01\_load\_TSA.R
+    -   02\_clean.R
+    -   03\_analysis\_Maps.R
+    -   03\_analysis\_BoxPlots.R - which calls boxplotsGB.R and BoxGB.R
+    -   03\_analysis\_GBPU\_Rank.R.
 
 ### Example Output
 
