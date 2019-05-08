@@ -21,16 +21,14 @@ Summaries of Provincial Cumulative Effects (CE) Grizzly Bear and Management stat
 
 There are six core scripts that are required for the analysis, the run_all.R script sets the environment variables:
 
-1. 01_load_TSA.R - Data load for AOI
-
+*01_load_TSA.R - Data load for AOI
   + TSA provided as an example with download from GeoBC.
   + Requires Provincial Grizzly Bear CE geodatabase, which includes LU summary data and GBPUs. available from Provincial CE program.
-  
 
-2. run_all_AOI.R - Identify Area of Interest analysis parameters
-  
+*run_all_AOI.R - Identify Area of Interest analysis parameters
   + AOI name and GBPUs to consider for the analysis.
   + Set % overlap for LUs that overlap AOI boundary.
+  
   + Identify which CE indicators to consider - main ones are listed, but a subset can be identified.
   + Calls set of R scripts to clean data and run analysis
   - 01_load_TSA.R
