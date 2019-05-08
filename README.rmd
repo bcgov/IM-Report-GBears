@@ -14,35 +14,42 @@ knitr::opts_chunk$set(
 )
 ```
 
-# Summary of Provincial Grizzly Bear informaiton for an Area of Interet for Integrated Monitoring reporting
+# Summary of Provincial Grizzly Bear information for an Area of Interest for Integrated Monitoring reporting
 Summaries of Provincial Cumulative Effects (CE) Grizzly Bear and Management status ranking data for use in reports. The script generates maps and box plots of indicators. The box plots compare the Landscape Units (LUs) withing an Area of Interest (AOI) with those for all of the intersecting Grizzly Bear Population Units (GBPUs).
 
 ### Usage
 
 There are six core scripts that are required for the analysis, the run_all.R script sets the enviornment variables:
 
-1. 01_load_TSA.R
+1. 01_load_TSA.R - Data load for AOI:
 
-  data load for AOI.
   - TSA provided as an example with download from GeoBC.
+  
   - Requires Provincial Grizzly Bear CE geodatabase, which includes LU summary datat and GBPUs. available from Provincial CE program.
+  
 
-2. run_all_AOI.R:
-
-  Identify Area of Interest analysis parameters 
+2. run_all_AOI.R - Identify Area of Interest analysis parameters:
+  
   - AOI name and GBPUs to consider for the anlysis
+  
   - Set % overlap for LUs that overlap AOI boundary
+  
   - Identify which CE intdicators to consider - main ones are listed, but a subset can be identified
 
-  Calls set of R scripts to clean data and run analysis
+  Calls set of R scripts to clean data and run analysis:
+  
   - 01_load_TSA.R
+  
   - 02_clean.R
+  
   - 03_analysis_Maps.R
+  
   - 03_analysis_BoxPlots.R - which calls boxplotsGB.R and BoxGB.R
+  
   - 03_analysis_GBPU_Rank.R
 
 ### Example Output
-The script generates 3 types of output; 1. indicator maps for AOI, 2) box plots comparing AOI LUs with GBPUs LUs, and 3) map of management rank.
+The script generates 3 types of output; 1) indicator maps for AOI, 2) box plots comparing AOI LUs with GBPUs LUs, and 3) map of management rank.
 ![inputs](img/RdDensLakes TSA.png)
 ![inputs](img/Francois_RoadDensity.png)
 
