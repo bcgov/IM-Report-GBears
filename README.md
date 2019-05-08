@@ -13,32 +13,23 @@ intersecting Grizzly Bear Population Units (GBPUs).
 There are six core scripts that are required for the analysis, the
 run\_all.R script sets the environment variables:
 
-01\_load\_TSA.R - Data load for AOI:
+1.  01\_load\_TSA.R - Data load for AOI
 
 -   TSA provided as an example with download from GeoBC.
-
 -   Requires Provincial Grizzly Bear CE geodatabase, which includes LU
     summary data and GBPUs. available from Provincial CE program.
 
-run\_all\_AOI.R - Identify Area of Interest analysis parameters:
+1.  run\_all\_AOI.R - Identify Area of Interest analysis parameters
 
--   AOI name and GBPUs to consider for the analysis
-
--   Set % overlap for LUs that overlap AOI boundary
-
+-   AOI name and GBPUs to consider for the analysis.
+-   Set % overlap for LUs that overlap AOI boundary.
 -   Identify which CE indicators to consider - main ones are listed, but
-    a subset can be identified
-
-Calls set of R scripts to clean data and run analysis:
-
+    a subset can be identified.
+-   Calls set of R scripts to clean data and run analysis
 -   01\_load\_TSA.R
-
 -   02\_clean.R
-
 -   03\_analysis\_Maps.R
-
 -   03\_analysis\_BoxPlots.R - which calls boxplotsGB.R and BoxGB.R
-
 -   03\_analysis\_GBPU\_Rank.R
 
 ### Example Output
