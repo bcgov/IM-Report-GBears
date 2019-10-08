@@ -26,20 +26,21 @@ subGBPU <-GBPUM
 
 #factor the mapped attribute 'RankCode'
 subGBPU$RankCode_map<-factor(subGBPU$RankCode)
+subGBPU$RankCode_map<-factor(subGBPU$Rank_Number)
 #set map extent to GBPU.AOI, otherwise maps entire province
 mapRange1 <- c(range(st_coordinates(GBPU.AOI.spatial)[,1]),range(st_coordinates(GBPU.AOI.spatial)[,2]))
 
-plot_title<-"Grizzly Bear - Management Rank"
-plot_legend<-'Management Rank'
+plot_title<-"Grizzly Bear - Conservation Rank"
+plot_legend<-'Conservation Rank'
 #write out map to figure directory
 pdf(file=file.path(figsOutDir,paste("GBPU_",AOI,".pdf",sep='')))
 ggplot(subGBPU) +
   geom_sf(data = subGBPU, aes(fill = RankCode_map)) +
   scale_fill_brewer(palette="RdYlGn", direction =1) +
   labs(fill = plot_legend) +
-  geom_sf(data = subGBPU1, col = "red", alpha = 0, size = 0.5)+
+  geom_sf(data = subGBPU, col = "red", alpha = 0, size = 0.5)+
   geom_sf(data = AOI.spatial, col = "blue", alpha = 0, size = 0.75) +
-  geom_sf_label(data = subGBPU1, label.size = 0.1, 
+  geom_sf_label(data = subGBPU, label.size = 0.1, 
                 aes(label = POPULATION_NAME)) +
   #geom_sf_text(aes(label = POPULATION_NAME), colour = "black") +
   coord_sf(xlim = mapRange1[c(1:2)], ylim = mapRange1[c(3:4)]) +

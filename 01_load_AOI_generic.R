@@ -10,25 +10,22 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 
-source("header.R")
+#source("header.R")
+
+ProvLUs.spatial <- 
+  read_sf(GB_gdb, layer = "LU_SUMMARY_poly_v5_20160210")
+GBPU.spatial <- read_sf(GB_gdb, layer = "GBPU_BC_edits_v2_20150601")
+Prov_crs <- st_crs(ProvLUs.spatial)
 
 # Consolidate AOI into a single geometry - need to modify this section based on AOI boundary
-AOI<-'LBN'
-AOI.Name<-"Lake Babine Nation"
-AOI.ShpName <- "Lake_Babine"
-
-AOI.spatial<-read_sf(dsn=GISdir, layer=AOI.ShpName)
-mapview()
-AOI.spatial
+AOI.spatial<-read_sf(dsn=AOI.dir, layer=AOI.ShpName) %>%
+  st_transform(Prov_crs)
+mapview(AOI.spatial)
 
 #GB CE  data from geodatabase
 GB_gdb <- list.files(file.path(BearsCEDir), pattern = ".gdb", full.names = TRUE)[1]
 gb_list <- st_layers(GB_gdb)
 
-ProvLUs <- read_sf(GB_gdb, layer = "LU_SUMMARY_poly_v5_20160210")
-GBPU <- read_sf(GB_gdb, layer = "GBPU_BC_edits_v2_20150601")
-
-#NatureSerce ranking data
 GBRe_Rank <- data.frame(read_excel(path=file.path(RankDir,paste('Threat_Calc.xls',sep=''))))
 
 #Read in LU csv 

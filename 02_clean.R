@@ -48,7 +48,7 @@ GBPU_LU_Context.spatial<-subset(ProvLUs.spatial, MAX_GBPU_POPULATION_NAME %in% G
 
 GBPU_LU_Context<-GBPU_LU_Context.spatial
 st_geometry(GBPU_LU_Context) <- NULL
-write.table(GBPU_LU_Context, file = file.path(dir.data,"AOIContext_LUs.csv"),append = FALSE, quote = TRUE, row.names = FALSE, col.names = TRUE, sep=",")
+write.table(GBPU_LU_Context, file = file.path(dataOutDir,"AOIContext_LUs.csv"),append = FALSE, quote = TRUE, row.names = FALSE, col.names = TRUE, sep=",")
 
 #Union GBPUs so one polygon for viewing
 GBPU.AOI.spatial<-st_union(GBPU_LU_Context.spatial)
@@ -102,19 +102,22 @@ for (gbpu in 1:num) {
     IndicatorList[Flagno]<-round(sum(eval(parse(text = FlagInd))=='Fail')/noGBPULU*100)
     
     #do another items for AOI portion
-    FlagInd<-paste('AOI_GBPU1$',Indicators[Flagno],sep='')
-    noAOILU<-nrow(AOI_GBPU1)
+    FlagInd<-paste('GBPU1$',Indicators[Flagno],sep='')
+    noAOILU<-nrow(GBPU1)
     AOIIndicatorList[Flagno]<-round(sum(eval(parse(text = FlagInd))=='Fail')/noAOILU*100)
     
   }
   
   #Create new data frame containing the summary numbers for AOI portion and GBPU
-  GBPU2<-data.frame(GBSubset,round(GBPUArea),round(AOIArea),round(pcAOIofGBPU),IndicatorList[1],AOIIndicatorList[1], IndicatorList[2],AOIIndicatorList[2],IndicatorList[3],AOIIndicatorList[3],IndicatorList[4],AOIIndicatorList[4],IndicatorList[5],AOIIndicatorList[5],IndicatorList[6],AOIIndicatorList[6],IndicatorList[7],AOIIndicatorList[7],IndicatorList[8],AOIIndicatorList[8],IndicatorList[9],AOIIndicatorList[9])
-  colnames(GBPU2)<-c('GBPU','GBPUArea','TSAArea','pcTSAofGBPU','Mortality','TSAMortality','RoadDensity','TSARoadDensity','CoreSercurityAreas','TSACoreSercurityAreas','FrontCountry','TSAFrontCountry','HunterDensity','TSAHunterDensity','QaulityFood','TSAQaulityFood','MidSeral','TSAMidSeral','HabitatProtection','TSAHabitatProtection','WHA','TSAWHA')
+  GBPU2<-data.frame(GBSubset,round(GBPUArea),noGBPULU,round(AOIArea),round(pcAOIofGBPU),IndicatorList[1],AOIIndicatorList[1], IndicatorList[2],AOIIndicatorList[2],IndicatorList[3],AOIIndicatorList[3],IndicatorList[4],AOIIndicatorList[4],IndicatorList[5],AOIIndicatorList[5],IndicatorList[6],AOIIndicatorList[6],IndicatorList[7],AOIIndicatorList[7],IndicatorList[8],AOIIndicatorList[8],IndicatorList[9],AOIIndicatorList[9])
+  colnames(GBPU2)<-c('GBPU','GBPUArea','noLU','TSAArea','pcTSAofGBPU','Mortality','TSAMortality','RoadDensity','TSARoadDensity','CoreSercurityAreas','TSACoreSercurityAreas','FrontCountry','TSAFrontCountry','HunterDensity','TSAHunterDensity','QaulityFood','TSAQaulityFood','MidSeral','TSAMidSeral','HabitatProtection','TSAHabitatProtection','WHA','TSAWHA')
+  
+  #GBPU2<-data.frame(GBSubset,round(GBPUArea),round(AOIArea),round(pcAOIofGBPU),IndicatorList[1],AOIIndicatorList[1], IndicatorList[2],AOIIndicatorList[2],IndicatorList[3],AOIIndicatorList[3],IndicatorList[4],AOIIndicatorList[4],IndicatorList[5],AOIIndicatorList[5],IndicatorList[6],AOIIndicatorList[6],IndicatorList[7],AOIIndicatorList[7],IndicatorList[8],AOIIndicatorList[8],IndicatorList[9],AOIIndicatorList[9])
+  #colnames(GBPU2)<-c('GBPU','GBPUArea','TSAArea','pcTSAofGBPU','Mortality','TSAMortality','RoadDensity','TSARoadDensity','CoreSercurityAreas','TSACoreSercurityAreas','FrontCountry','TSAFrontCountry','HunterDensity','TSAHunterDensity','QaulityFood','TSAQaulityFood','MidSeral','TSAMidSeral','HabitatProtection','TSAHabitatProtection','WHA','TSAWHA')
   
   #Create new data frame containing the summary numbers for GBPUs only
-  GBPU3<-data.frame(GBSubset,round(GBPUArea),IndicatorList[1], IndicatorList[2],IndicatorList[3],IndicatorList[4],IndicatorList[5],IndicatorList[6],IndicatorList[7],IndicatorList[8],IndicatorList[9])
-  colnames(GBPU3)<-c('GBPU','GBPUArea','Mortality','RoadDensity','CoreSercurityAreas','FrontCountry','HunterDensity','QaulityFood','MidSeral','HabitatProtection','WHA')
+  GBPU3<-data.frame(GBSubset,round(GBPUArea),noGBPULU,IndicatorList[1], IndicatorList[2],IndicatorList[3],IndicatorList[4],IndicatorList[5],IndicatorList[6],IndicatorList[7],IndicatorList[8],IndicatorList[9])
+  colnames(GBPU3)<-c('GBPU','GBPUArea','noLU','Mortality','RoadDensity','CoreSercurityAreas','FrontCountry','HunterDensity','QaulityFood','MidSeral','HabitatProtection','WHA')
   
   ifelse(gbpu == 1, appendcolvar<-FALSE, appendcolvar<-TRUE)
   write.table((GBPU3), file = (file.path(dataOutDir,"GBPUOut.csv")),append = appendcolvar, quote = FALSE, row.names = FALSE, col.names = !appendcolvar, sep=",")#sep="\t") ifelse(gbpu == 1, appendcolvar<-FALSE, appendcolvar<-TRUE)
